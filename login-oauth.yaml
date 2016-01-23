@@ -1,0 +1,32 @@
+enabled: true
+
+user:
+    autocreate: false
+    access:
+      site:
+        login: true
+
+providers:
+    Facebook:
+      enabled: false
+      credentials:
+        key:
+        secret:
+
+    Google:
+      enabled: false
+      credentials:
+        key:
+        secret:
+
+    GitHub:
+      enabled: false
+      credentials:
+        key:
+        secret:
+
+    Twitter:
+      enabled: false
+      credentials:
+        key:
+        secret:

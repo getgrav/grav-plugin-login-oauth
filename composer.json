@@ -1,0 +1,37 @@
+{
+    "name": "grav-plugin-login-oauth",
+    "description": "Enables login with OAuth accounts such as Facebook",
+    "keywords": ["login", "oauth", "social"],
+    "homepage": "https://github.com/getgrav/grav-plugin-login-oauth",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Team Grav",
+            "email": "devs@getgrav.org",
+            "homepage": "http://getgrav.org",
+            "role": "Developer"
+        },
+        {
+            "name": "Sommerregen",
+            "email": "sommerregen@benjamin-regler.de",
+            "homepage": "http://benjamin-regler.de",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "support@example.org",
+        "issues": "https://github.com/getgrav/grav-plugin-login-oauth/issues",
+        "irc": "https://gitter.im/getgrav/grav",
+        "forum": "http://getgrav.org/forum",
+        "docs": "https://github.com/getgrav/grav-plugin-login-oauth/blob/master/README.md"
+    },
+    "require": {
+        "php": ">=5.4.0",
+        "lusitanian/oauth": "0.8.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Grav\\Plugin\\LoginOAuth\\": "classes/"
+        }
+    }
+}
