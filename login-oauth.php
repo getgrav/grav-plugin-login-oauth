@@ -88,7 +88,7 @@ class LoginOauthPlugin extends Plugin
         $twig = $this->grav['twig'];
 
         $providers = [];
-            foreach ($this->config->get('plugins.login.oauth.providers') as $provider => $options) {
+            foreach ($this->config->get('plugins.login-oauth.providers') as $provider => $options) {
                 if ($options['enabled'] && isset($options['credentials'])) {
                     $providers[$provider] = $options['credentials'];
                 }
