@@ -31,7 +31,7 @@ form:
             enabled:
               type: toggle
               label: PLUGIN_LOGIN.OAUTH_ENABLE
-              highlight: 0
+              highlight: 1
               default: 0
               options:
                 1: PLUGIN_ADMIN.ENABLED
@@ -55,121 +55,119 @@ form:
               label: PLUGIN_LOGIN.OAUTH_ACCESS
               placeholder_key: signin.login
               placeholder_value: true
-
-            providers:
+              
+        providers:
+          type: tab
+          title: PLUGIN_LOGIN.OAUTH_PROVIDER_SECTION
+          fields:
+            providers.Facebook:
               type: section
-              title: PLUGIN_LOGIN.OAUTH_PROVIDER_SECTION
-              underline: true
+              title: PLUGIN_LOGIN.FACEBOOK
 
               fields:
-                providers.Facebook:
-                  type: section
-                  title: PLUGIN_LOGIN.FACEBOOK
+                providers.Facebook.enabled:
+                  type: toggle
+                  label: PLUGIN_LOGIN.OAUTH_PROVIDER_FACEBOOK
+                  highlight: 1
+                  default: 0
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                  validate:
+                    type: bool
 
-                  fields:
-                    providers.Facebook.enabled:
-                      type: toggle
-                      label: PLUGIN_LOGIN.OAUTH_PROVIDER_FACEBOOK
-                      highlight: 1
-                      default: 0
-                      options:
-                        1: PLUGIN_ADMIN.ENABLED
-                        0: PLUGIN_ADMIN.DISABLED
-                      validate:
-                        type: bool
+                providers.Facebook.credentials.key:
+                  type: text
+                  label: PLUGIN_LOGIN.OAUTH_CLIENT_ID
+                  validate:
+                    type: string
 
-                    providers.Facebook.credentials.key:
-                      type: text
-                      label: PLUGIN_LOGIN.OAUTH_CLIENT_ID
-                      validate:
-                        type: string
+                providers.Facebook.credentials.secret:
+                  type: text
+                  label: PLUGIN_LOGIN.OAUTH_CLIENT_SECRET
+                  validate:
+                    type: string
 
-                    providers.Facebook.credentials.secret:
-                      type: text
-                      label: PLUGIN_LOGIN.OAUTH_CLIENT_SECRET
-                      validate:
-                        type: string
+            providers.Google:
+              type: section
+              title: PLUGIN_LOGIN.GOOGLE
 
-                providers.Google:
-                  type: section
-                  title: PLUGIN_LOGIN.GOOGLE
+              fields:
+                providers.Google.enabled:
+                  type: toggle
+                  label: PLUGIN_LOGIN.OAUTH_PROVIDER_GOOGLE
+                  highlight: 1
+                  default: 0
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                  validate:
+                    type: bool
 
-                  fields:
-                    providers.Google.enabled:
-                      type: toggle
-                      label: PLUGIN_LOGIN.OAUTH_PROVIDER_GOOGLE
-                      highlight: 1
-                      default: 0
-                      options:
-                        1: PLUGIN_ADMIN.ENABLED
-                        0: PLUGIN_ADMIN.DISABLED
-                      validate:
-                        type: bool
+                providers.Google.credentials.key:
+                  type: text
+                  label: PLUGIN_LOGIN.OAUTH_CLIENT_ID
+                  validate:
+                    type: string
 
-                    providers.Google.credentials.key:
-                      type: text
-                      label: PLUGIN_LOGIN.OAUTH_CLIENT_ID
-                      validate:
-                        type: string
+                providers.Google.credentials.secret:
+                  type: text
+                  label: PLUGIN_LOGIN.OAUTH_CLIENT_SECRET
+                  validate:
+                    type: string
 
-                    providers.Google.credentials.secret:
-                      type: text
-                      label: PLUGIN_LOGIN.OAUTH_CLIENT_SECRET
-                      validate:
-                        type: string
+            providers.GitHub:
+              type: section
+              title: PLUGIN_LOGIN.GITHUB
 
-                providers.GitHub:
-                  type: section
-                  title: PLUGIN_LOGIN.GITHUB
+              fields:
+                providers.GitHub.enabled:
+                  type: toggle
+                  label: PLUGIN_LOGIN.OAUTH_PROVIDER_GITHUB
+                  highlight: 1
+                  default: 0
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                  validate:
+                    type: bool
 
-                  fields:
-                    providers.GitHub.enabled:
-                      type: toggle
-                      label: PLUGIN_LOGIN.OAUTH_PROVIDER_GITHUB
-                      highlight: 1
-                      default: 0
-                      options:
-                        1: PLUGIN_ADMIN.ENABLED
-                        0: PLUGIN_ADMIN.DISABLED
-                      validate:
-                        type: bool
+                providers.GitHub.credentials.key:
+                  type: text
+                  label: PLUGIN_LOGIN.OAUTH_CLIENT_ID
+                  validate:
+                    type: string
 
-                    providers.GitHub.credentials.key:
-                      type: text
-                      label: PLUGIN_LOGIN.OAUTH_CLIENT_ID
-                      validate:
-                        type: string
+                providers.GitHub.credentials.secret:
+                  type: text
+                  label: PLUGIN_LOGIN.OAUTH_CLIENT_SECRET
+                  validate:
+                    type: string
 
-                    providers.GitHub.credentials.secret:
-                      type: text
-                      label: PLUGIN_LOGIN.OAUTH_CLIENT_SECRET
-                      validate:
-                        type: string
+            providers.Twitter:
+              type: section
+              title: PLUGIN_LOGIN.TWITTER
 
-                providers.Twitter:
-                  type: section
-                  title: PLUGIN_LOGIN.TWITTER
+              fields:
+                providers.Twitter.enabled:
+                  type: toggle
+                  label: PLUGIN_LOGIN.OAUTH_PROVIDER_TWITTER
+                  highlight: 1
+                  default: 0
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                  validate:
+                    type: bool
 
-                  fields:
-                    providers.Twitter.enabled:
-                      type: toggle
-                      label: PLUGIN_LOGIN.OAUTH_PROVIDER_TWITTER
-                      highlight: 1
-                      default: 0
-                      options:
-                        1: PLUGIN_ADMIN.ENABLED
-                        0: PLUGIN_ADMIN.DISABLED
-                      validate:
-                        type: bool
+                providers.Twitter.credentials.key:
+                  type: text
+                  label: PLUGIN_LOGIN.OAUTH_CLIENT_ID
+                  validate:
+                    type: string
 
-                    providers.Twitter.credentials.key:
-                      type: text
-                      label: PLUGIN_LOGIN.OAUTH_CLIENT_ID
-                      validate:
-                        type: string
-
-                    providers.Twitter.credentials.secret:
-                      type: text
-                      label: PLUGIN_LOGIN.OAUTH_CLIENT_SECRET
-                      validate:
-                        type: string
+                providers.Twitter.credentials.secret:
+                  type: text
+                  label: PLUGIN_LOGIN.OAUTH_CLIENT_SECRET
+                  validate:
+                    type: string
