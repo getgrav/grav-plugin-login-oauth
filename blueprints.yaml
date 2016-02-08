@@ -39,6 +39,18 @@ form:
               validate:
                 type: bool
 
+            built_in_css:
+              type: toggle
+              label: PLUGIN_LOGIN_OAUTH.BUILTIN_CSS
+              highlight: 1
+              default: 1
+              help: PLUGIN_LOGIN_OAUTH.BUILTIN_CSS_HELP
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+
             user.autocreate:
               type: toggle
               label: PLUGIN_LOGIN_OAUTH.OAUTH_USER_AUTOCREATE

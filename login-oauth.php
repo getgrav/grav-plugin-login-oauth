@@ -100,6 +100,11 @@ class LoginOauthPlugin extends Plugin
             'enabled'   => $this->config->get('plugins.login-oauth.enabled'),
             'providers' => $providers
         ];
+        
+        // add CSS for frontend if required
+        if (!$this->isAdmin() && $this->config->get('plugins.login-oauth.built_in_css')) {
+            $this->grav['assets']->add('plugin://login-oauth/css/login-oauth.css');
+        }
     }
 
     /**
