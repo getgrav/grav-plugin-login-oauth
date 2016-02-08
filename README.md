@@ -1,6 +1,6 @@
-# Grav Login Plugin
+# Grav Login Plugin OAuth Add-On
 
-The **login-oauth plugin** for [Grav](http://github.com/getgrav/grav) adds the ability for users to log in using Social sites.
+The **Grav Login Plugin OAuth Add-On** for [Grav](http://github.com/getgrav/grav) adds the ability for users to log in using Social sites.
 
 Currently Available Providers:
 - Facebook
