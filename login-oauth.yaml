@@ -20,10 +20,10 @@ providers:
         secret:
 
     GitHub:
-      enabled: false
+      enabled: true
       credentials:
-        key:
-        secret:
+        key: 104f7abd33e5b8211654
+        secret: 31c68cedbc7d9d8426c19838932aefb8ae35cffd
 
     Twitter:
       enabled: false
