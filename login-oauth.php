@@ -1,17 +1,16 @@
 <?php
 namespace Grav\Plugin;
 
-use Grav\Common\Grav;
-use Grav\Common\Page\Page;
-use Grav\Common\Page\Pages;
 use Grav\Common\Plugin;
+use Grav\Common\Session;
+use Grav\Common\Twig\Twig;
 use Grav\Common\Uri;
-use RocketTheme\Toolbox\File\File;
-use RocketTheme\Toolbox\Event\Event;
-use RocketTheme\Toolbox\Session\Session;
-use Symfony\Component\Yaml\Yaml as YamlParser;
+use Grav\Plugin\LoginOAuth\Controller as Controller;
 
-
+/**
+ * Class LoginOauthPlugin
+ * @package Grav\Plugin
+ */
 class LoginOauthPlugin extends Plugin
 {
     /**
@@ -23,6 +22,7 @@ class LoginOauthPlugin extends Plugin
             'onPluginsInitialized' => ['onPluginsInitialized', 0],
         ];
     }
+
     /**
      * Enable if not Admin
      */
@@ -43,14 +43,14 @@ class LoginOauthPlugin extends Plugin
         $oauth = $oauth ?: $this->grav['session']->oauth;
         $post = !empty($_POST) ? $_POST : [];
 
-        /** @var Grav\Common\Session */
+        /** @var Session */
         $session = $this->grav['session'];
 
 
         $this->enable([
             'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
             'onTwigSiteVariables' => ['onTwigSiteVariables', 0],
-            'onLoginPage' => ['onLoginPage', 0],
+            'onLoginPage'         => ['onLoginPage', 0],
         ]);
 
         // Autoload classes
@@ -63,8 +63,8 @@ class LoginOauthPlugin extends Plugin
         // Manage OAuth login
         $task = !empty($post['task']) ? $post['task'] : $uri->param('task');
         if (!$task && isset($post['oauth']) || (!empty($_GET) && $session->oauth)) {
-            //require_once __DIR__ . '/classes/OAuthLoginController.php';
-            $controller = new LoginOAuth\OAuthLoginController($this->grav, $oauth, $post);
+            require_once __DIR__ . '/classes/Controller.php';
+            $controller = new Controller($this->grav, $oauth, $post);
             $controller->execute();
             $controller->redirect();
         }
@@ -72,6 +72,7 @@ class LoginOauthPlugin extends Plugin
         // Aborted OAuth authentication (invalidate it)
         unset($session->oauth);
     }
+
     /**
      * Add plugin templates path
      */
@@ -79,6 +80,7 @@ class LoginOauthPlugin extends Plugin
     {
         $this->grav['twig']->twig_paths[] = __DIR__ . '/login/templates';
     }
+
     /**
      * Add Twig Site Variables
      */
@@ -88,17 +90,18 @@ class LoginOauthPlugin extends Plugin
         $twig = $this->grav['twig'];
 
         $providers = [];
-            foreach ($this->config->get('plugins.login-oauth.providers') as $provider => $options) {
-                if ($options['enabled'] && isset($options['credentials'])) {
-                    $providers[$provider] = $options['credentials'];
-                }
+        foreach ($this->config->get('plugins.login-oauth.providers') as $provider => $options) {
+            if ($options['enabled'] && isset($options['credentials'])) {
+                $providers[$provider] = $options['credentials'];
             }
+        }
 
         $twig->twig_vars['oauth'] = [
-                'enabled' => $this->config->get('plugins.login-oauth.enabled'),
-                'providers' => $providers
-            ];
+            'enabled'   => $this->config->get('plugins.login-oauth.enabled'),
+            'providers' => $providers
+        ];
     }
+
     /**
      * Add navigation item to the admin plugin
      */
