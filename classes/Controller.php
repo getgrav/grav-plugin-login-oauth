@@ -333,10 +333,13 @@ class Controller extends \Grav\Plugin\Login\Controller
         $user->set('password', md5($data['id']));
         $user->set('email', $data['email']);
         $user->set('lang', $data['lang']);
+
         // Set access rights
-        $user->join('access', $this->grav['config']->get('plugins.login.oauth.user.access', []));
+        $user->set('access', $this->grav['config']->get('plugins.login.oauth.user.access', []));
+
         // Authorize OAuth user to access page(s)
         $user->authenticated = $user->authorize('site.login');
+
         if ($save) {
             $user->file(CompiledYamlFile::instance($accountFile));
             $user->save();
