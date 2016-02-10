@@ -331,32 +331,20 @@ class Controller extends \Grav\Plugin\Login\Controller
      *                                    setting as password
      * @param  string $data               ['email']      The email of the OAuth user
      * @param  string $data               ['language']   Language
-     * @param  bool   $save               Save user
      *
      * @return User                       A user object
      */
-    protected function createUser($data, $save = false)
+    protected function createUser($data)
     {
         /** @var User $user */
         $user = $this->grav['user'];
-        $accountFile = $this->grav['inflector']->underscorize($data['username']);
-        $accountFile = $this->grav['locator']->findResource('user://accounts/' . strtolower("$accountFile.{$this->action}") . YAML_EXT,
-            true, true);
-        $user->set('username', $data['username']);
-        $user->set('password', md5($data['id']));
-        $user->set('email', $data['email']);
-        $user->set('lang', $data['lang']);
+        $id = $data['id'];
 
-        // Set access rights
-        $user->set('access', $this->grav['config']->get('plugins.login.oauth.user.access', []));
-
-        // Authorize OAuth user to access page(s)
-        $user->authenticated = $user->authorize('site.login');
-
-        if ($save) {
-            $user->file(CompiledYamlFile::instance($accountFile));
-            $user->save();
-        }
+        $data['fullname'] = $data['username'];
+        $data['username'] = $this->getUsername($id);
+        $data['password'] = md5($id);
+        $data['enabled'] = true;
+        $this->login->register($data);
 
         return $user;
     }
