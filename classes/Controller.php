@@ -3,7 +3,6 @@ namespace Grav\Plugin\LoginOAuth;
 
 use Grav\Common\Grav;
 use Grav\Common\User\User;
-use Grav\Common\File\CompiledYamlFile;
 use OAuth\ServiceFactory;
 use OAuth\Common\Storage\Session;
 use OAuth\Common\Consumer\Credentials;
@@ -84,8 +83,7 @@ class Controller extends \Grav\Plugin\Login\Controller
 
         if (isset($config['credentials'])) {
             // Setup the credentials for the requests
-            $credentials = new Credentials($config['credentials']['key'], $config['credentials']['secret'],
-                $this->grav['uri']->url(true));
+            $credentials = new Credentials($config['credentials']['key'], $config['credentials']['secret'], $this->grav['uri']->url(true));
             // Instantiate service using the credentials, http client
             // and storage mechanism for the token
             $scope = isset($this->scopes[$provider]) ? $this->scopes[$provider] : [];
@@ -235,7 +233,7 @@ class Controller extends \Grav\Plugin\Login\Controller
      *
      * @return null|bool          Returns a boolean on finished authentication.
      */
-    public function oauthGithub()
+    public function oauthGitHub()
     {
         return $this->genericOAuthProvider(function () {
             // Get username, email and language
@@ -329,7 +327,7 @@ class Controller extends \Grav\Plugin\Login\Controller
      * Create user.
      *
      * @param  string $data               ['username']   The username of the OAuth user
-     * @param  string $data               ['password']   The unique id of the Oauth user
+     * @param  string $data               ['password']   The unique id of the OAuth user
      *                                    setting as password
      * @param  string $data               ['email']      The email of the OAuth user
      * @param  string $data               ['language']   Language
