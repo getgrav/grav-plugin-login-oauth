@@ -289,13 +289,10 @@ class Controller extends \Grav\Plugin\Login\Controller
      */
     protected function authenticateOAuth($username, $id, $email, $language = '')
     {
-        if ($user->exists()) {
-            // Update username (hide OAuth from user)
-            $user->set('username', $username);
-            $password = md5($id);
-            $authenticated = $user->authenticate($password);
-        } else {
         $user = User::load($this->getUsername($id));
+
+        if (!$user->exists()) {
+
             /** @var User $user */
             $user = $this->grav['user'];
             // Check user rights
@@ -308,9 +305,11 @@ class Controller extends \Grav\Plugin\Login\Controller
                     'lang'     => $language,
                 ]);
             }
-            // Authenticate user against oAuth rules
-            $authenticated = $user->authenticated;
         }
+
+        $password = md5($id);
+        $authenticated = $user->authenticate($password);
+
         // Store user in session
         if ($authenticated) {
             $this->grav['session']->user = $user;
@@ -334,17 +333,14 @@ class Controller extends \Grav\Plugin\Login\Controller
      */
     protected function createUser($data)
     {
-        /** @var User $user */
-        $user = $this->grav['user'];
         $id = $data['id'];
 
         $data['fullname'] = $data['username'];
         $data['username'] = $this->getUsername($id);
         $data['password'] = md5($id);
-        $data['enabled'] = true;
-        $this->login->register($data);
+        $data['state'] = 'enabled';
 
-        return $user;
+        return $this->login->register($data);
     }
 
     /**
