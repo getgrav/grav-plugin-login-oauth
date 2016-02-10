@@ -67,7 +67,7 @@ class Controller extends \Grav\Plugin\Login\Controller
         $this->factory = new ServiceFactory();
         // Use curl client instead of fopen stream
         if (extension_loaded('curl')) {
-            $this->factory->setHttpClient(new CurlCLient());
+            $this->factory->setHttpClient(new CurlClient());
         }
     }
 
@@ -273,42 +273,43 @@ class Controller extends \Grav\Plugin\Login\Controller
     {
         $service_identifier = $this->action;
         $user_identifier = $this->grav['inflector']->underscorize($id);
-
         return strtolower("$service_identifier.$user_identifier");
     }
 
     /**
      * Authenticate user.
      *
-     * @param  string $username The username of the OAuth user
+     * @param  string $fullname The user name of the OAuth user
      * @param  string $id       The id of the OAuth user
      * @param  string $email    The email of the OAuth user
      * @param  string $language Language
      *
      * @return bool True if user was authenticated
      */
-    protected function authenticateOAuth($username, $id, $email, $language = '')
+    protected function authenticateOAuth($fullname, $id, $email, $language = '')
     {
-        $user = User::load($this->getUsername($id));
+        $username = $this->getUsername($id);
+        $user = User::load($username);
+        $password = md5($id);
 
         if (!$user->exists()) {
+            // Create the user
+            $user = $this->createUser([
+                'id'       => $id,
+                'fullname' => $fullname,
+                'username' => $username,
+                'email'    => $email,
+                'lang'     => $language,
+            ]);
 
-            /** @var User $user */
-            $user = $this->grav['user'];
-            // Check user rights
-            if (!$user->authenticated) {
-                // Create new user from OAuth request
-                $user = $this->createUser([
-                    'id'       => $id,
-                    'username' => $username,
-                    'email'    => $email,
-                    'lang'     => $language,
-                ]);
-            }
+            $authenticated = true;
+            $user->authenticated = true;
+            $user->save();
+
+            $user = User::load($username);
+        } else {
+            $authenticated = $user->authenticate($password);
         }
-
-        $password = md5($id);
-        $authenticated = $user->authenticate($password);
 
         // Store user in session
         if ($authenticated) {
@@ -335,8 +336,6 @@ class Controller extends \Grav\Plugin\Login\Controller
     {
         $id = $data['id'];
 
-        $data['fullname'] = $data['username'];
-        $data['username'] = $this->getUsername($id);
         $data['password'] = md5($id);
         $data['state'] = 'enabled';
 
