@@ -105,9 +105,13 @@ class Controller extends \Grav\Plugin\Login\Controller
             } else {
                 $this->setMessage($t->translate('PLUGIN_LOGIN_OAUTH.ACCESS_DENIED'));
             }
+
             // Redirect to current URI
-            $referrer = $this->grav['uri']->url(true);
-            $this->setRedirect($referrer);
+            $redirect = $this->grav['config']->get('plugins.login.redirect_after_login');
+            if (!$redirect) {
+                $redirect = $this->grav['session']->redirect_after_login;
+            }
+            $this->setRedirect($redirect);
         } elseif (!$this->grav['session']->oauth) {
             $this->setMessage($t->translate(['PLUGIN_LOGIN_OAUTH.OAUTH_PROVIDER_NOT_SUPPORTED', $this->action]));
         }
