@@ -80,7 +80,8 @@ class Controller extends \Grav\Plugin\Login\Controller
         /** @var \Grav\Common\Language\Language */
         $t = $this->grav['language'];
         $provider = strtolower($this->action);
-        $config = $this->grav['config']->get('plugins.login.oauth.providers.' . $this->action, []);
+        $config = $this->grav['config']->get('plugins.login-oauth.providers.' . $this->action, []);
+
         if (isset($config['credentials'])) {
             // Setup the credentials for the requests
             $credentials = new Credentials($config['credentials']['key'], $config['credentials']['secret'],
