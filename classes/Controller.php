@@ -300,15 +300,13 @@ class Controller extends \Grav\Plugin\Login\Controller
             $user = $this->grav['user'];
             // Check user rights
             if (!$user->authenticated) {
-                $oauthUser = $this->grav['config']->get('plugins.login-oauth.user', []);
                 // Create new user from OAuth request
                 $user = $this->createUser([
                     'id'       => $id,
                     'username' => $username,
                     'email'    => $email,
                     'lang'     => $language,
-                    'access'   => $oauthUser['access']
-                ], $oauthUser['autocreate']);
+                ]);
             }
             // Authenticate user against oAuth rules
             $authenticated = $user->authenticated;
