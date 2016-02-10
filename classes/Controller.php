@@ -265,6 +265,21 @@ class Controller extends \Grav\Plugin\Login\Controller
     }
 
     /**
+     * Get the user identifier
+     *
+     * @param string $id The user ID on the service
+     *
+     * @return string
+     */
+    private function getUsername($id)
+    {
+        $service_identifier = $this->action;
+        $user_identifier = $this->grav['inflector']->underscorize($id);
+
+        return strtolower("$service_identifier.$user_identifier");
+    }
+
+    /**
      * Authenticate user.
      *
      * @param  string $username The username of the OAuth user
@@ -276,14 +291,13 @@ class Controller extends \Grav\Plugin\Login\Controller
      */
     protected function authenticateOAuth($username, $id, $email, $language = '')
     {
-        $accountFile = $this->grav['inflector']->underscorize($username);
-        $user = User::load(strtolower("$accountFile.{$this->action}"));
         if ($user->exists()) {
             // Update username (hide OAuth from user)
             $user->set('username', $username);
             $password = md5($id);
             $authenticated = $user->authenticate($password);
         } else {
+        $user = User::load($this->getUsername($id));
             /** @var User $user */
             $user = $this->grav['user'];
             // Check user rights
