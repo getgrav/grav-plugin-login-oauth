@@ -242,10 +242,13 @@ class Controller extends \Grav\Plugin\Login\Controller
         return $this->genericOAuthProvider(function () {
             // Get username, email and language
             $user = json_decode($this->service->request('user'), true);
+            var_dump($user);
+            //exit;
             $emails = json_decode($this->service->request('user/emails'), true);
+            $fullname = !empty($user['name'])?$user['name']:$user['login'];
 
             // Authenticate OAuth user against Grav system.
-            return $this->authenticateOAuth($user['login'], $user['id'], reset($emails));
+            return $this->authenticateOAuth($fullname, $user['id'], reset($emails));
         });
     }
 
