@@ -242,6 +242,8 @@ class Controller extends \Grav\Plugin\Login\Controller
         return $this->genericOAuthProvider(function () {
             // Get username, email and language
             $user = json_decode($this->service->request('user'), true);
+            var_dump($user);
+            //exit;
             $emails = json_decode($this->service->request('user/emails'), true);
             $fullname = !empty($user['name'])?$user['name']:$user['login'];
 
