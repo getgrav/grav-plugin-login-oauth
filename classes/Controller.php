@@ -206,8 +206,13 @@ class Controller extends \Grav\Plugin\Login\Controller
             $data = json_decode($this->service->request('/me'), true);
             $email = isset($data['email']) ? $data['email'] : '';
 
+            $dataUser = [
+                'id'       => $data['id'],
+                'fullname' => $data['name'],
+                'email'    => $email
+            ];
             // Authenticate OAuth user against Grav system.
-            return $this->authenticateOAuth($data['name'], $data['id'], $email);
+            return $this->authenticateOAuth($dataUser);
         });
     }
 
@@ -219,16 +224,21 @@ class Controller extends \Grav\Plugin\Login\Controller
     public function oauthGoogle()
     {
         return $this->genericOAuthProvider(function () {
-            // Get username, email and language
+            // Get fullname, email and language
             $data = json_decode($this->service->request('userinfo'), true);
-            $username = $data['given_name'] . ' ' . $data['family_name'];
+            $fullname = $data['given_name'] . ' ' . $data['family_name'];
             if (preg_match('~[\w\s]+\((\w+)\)~i', $data['name'], $matches)) {
-                $username = $matches[1];
+                $fullname = $matches[1];
             }
             $lang = isset($data['lang']) ? $data['lang'] : '';
 
+            $dataUser = [
+                'id'       => $data['id'],
+                'fullname' => $fullname,
+                'email'    => $data['email']
+            ];
             // Authenticate OAuth user against Grav system.
-            return $this->authenticateOAuth($username, $data['id'], $data['email'], $lang);
+            return $this->authenticateOAuth($dataUser, $lang);
         });
     }
 
@@ -245,8 +255,13 @@ class Controller extends \Grav\Plugin\Login\Controller
             $emails = json_decode($this->service->request('user/emails'), true);
             $fullname = !empty($user['name'])?$user['name']:$user['login'];
 
+            $dataUser = [
+                'id'       => $user['id'],
+                'fullname' => $fullname,
+                'email'    => reset($emails)
+            ];
             // Authenticate OAuth user against Grav system.
-            return $this->authenticateOAuth($fullname, $user['id'], reset($emails));
+            return $this->authenticateOAuth($dataUser);
         });
     }
 
@@ -262,8 +277,14 @@ class Controller extends \Grav\Plugin\Login\Controller
             $data = json_decode($this->service->request('account/verify_credentials.json?include_email=true'), true);
             $lang = isset($data['lang']) ? $data['lang'] : '';
 
+            $dataUser = [
+                'id'       => $data['id'],
+                'fullname' => $data['screen_name'],
+                'email'    => ''
+            ];
+
             // Authenticate OAuth user against Grav system.
-            return $this->authenticateOAuth($data['screen_name'], $data['id'], '', $lang);
+            return $this->authenticateOAuth($dataUser, $lang);
         }, 'oauth1');
     }
 
@@ -284,26 +305,26 @@ class Controller extends \Grav\Plugin\Login\Controller
     /**
      * Authenticate user.
      *
-     * @param  string $fullname The user name of the OAuth user
-     * @param  string $id       The id of the OAuth user
-     * @param  string $email    The email of the OAuth user
-     * @param  string $language Language
+     * @param  string $data             ['fullname'] The user name of the OAuth user
+     * @param  string $data             ['id']       The id of the OAuth user
+     * @param  string $data             ['email']    The email of the OAuth user
+     * @param  string $language                      Language
      *
      * @return bool True if user was authenticated
      */
-    protected function authenticateOAuth($fullname, $id, $email, $language = '')
+    protected function authenticateOAuth($data, $language = '')
     {
-        $username = $this->getUsername($id);
+        $username = $this->getUsername($data['id']);
         $user = User::load($username);
-        $password = md5($id);
+        $password = md5($data['id']);
 
         if (!$user->exists()) {
             // Create the user
             $user = $this->createUser([
-                'id'       => $id,
-                'fullname' => $fullname,
+                'id'       => $data['id'],
+                'fullname' => $data['fullname'],
                 'username' => $username,
-                'email'    => $email,
+                'email'    => $data['email'],
                 'lang'     => $language,
             ]);
 
