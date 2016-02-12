@@ -101,9 +101,9 @@ class Controller extends \Grav\Plugin\Login\Controller
         if (is_bool($authenticated)) {
             $this->reset();
             if ($authenticated) {
-                $this->setMessage($t->translate('PLUGIN_LOGIN_OAUTH.LOGIN_SUCCESSFUL'));
+                $this->setMessage($t->translate('PLUGIN_LOGIN.LOGIN_SUCCESSFUL'));
             } else {
-                $this->setMessage($t->translate('PLUGIN_LOGIN_OAUTH.ACCESS_DENIED'));
+                $this->setMessage($t->translate('PLUGIN_LOGIN.ACCESS_DENIED'));
             }
 
             // Redirect to current URI
