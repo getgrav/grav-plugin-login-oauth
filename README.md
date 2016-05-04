@@ -18,12 +18,13 @@ Both are available via GPM, and because the plugin has dependencies you just nee
 $ bin/gpm install login-oauth
 ```
 
-# OAuth
+# Usage
 
-By default OAuth allows users to login though they do not create an account file for the user. If you want an account file created (ex: for tracking purposes) change `user.autocreate` to `true` in `login-oauth.yaml`.
+Add a login-protected page, then make sure you fill the "Route" in the Login plugin settings. Add this route to the callback url required by the OAuth application on the service desired. Example: `http://yoursite.com/login`.
+
 >Note: OAuth has not been tested with Grav's multilang feature! Due to this, certain OAuth providers may not function properly on multilang sites
 
->IMPORTANT: `localhost` may NOT be used for callback and allowed URLs when creating OAuth provider applications due to certificate verification issues. Some services allow other URLs and it may be possible to add custom domains pointing to 127.0.0.1 in your hosts file and point applications there.
+>IMPORTANT: `localhost` may NOT be used for callback and allowed URLs when creating OAuth provider applications due to certificate verification issues. Some services allow other URLs and it may be possible to add custom domains pointing to 127.0.0.1 in your hosts file and point applications there. GitHub and Twitter are tested to work on localhost too, if it does not work you can use a tunnel like ngrok to test locally
 
 ## Facebook
 
