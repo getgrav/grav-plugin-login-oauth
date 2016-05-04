@@ -161,7 +161,8 @@ class Controller extends \Grav\Plugin\Login\Controller
                 } else {
                     $token = $this->storage->retrieveAccessToken($session->oauth);
                     // This was a callback request from OAuth1 service, get the token
-                    $this->service->requestAccessToken($_GET['oauth_token'], $_GET['oauth_verifier'],
+                    parse_str(parse_url($_GET['_url'])['query']);
+                    $this->service->requestAccessToken($oauth_token, $_GET['oauth_verifier'],
                         $token->getRequestTokenSecret());
 
                     return $callback();
