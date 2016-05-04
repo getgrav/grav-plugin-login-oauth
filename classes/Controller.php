@@ -333,7 +333,6 @@ class Controller extends \Grav\Plugin\Login\Controller
             $user->authenticated = true;
             $user->save();
 
-            $user = User::load($username);
         } else {
             $authenticated = $user->authenticate($password);
         }
