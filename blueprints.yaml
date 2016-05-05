@@ -1,5 +1,6 @@
 name: Login Plugin OAuth Addon
-version: 0.1.0
+version: 1.0.0-beta.1
+testing: true
 description: Enables login with OAuth accounts. Currently provides Facebook, Google, Twitter, Github
 icon: sign-in
 author:
