@@ -18,7 +18,6 @@ providers:
       enabled: false
       credentials:
         key:
-        key:
         secret:
 
     Twitter:
