@@ -34,11 +34,10 @@ Choose a category most similar to your business then click **Create App ID.**
 
 Scroll down on the next screen to the section titled **Tell us about your website.** Input a URL for the site (no need to include the protocol). Click **Next**
 
-Click **Skip Quick Start** Copy the **App ID** and **App Secret** into `login.yaml`
+Click **Skip Quick Start** Copy the **App ID** and **App Secret** into the plugin configuration under Facebook.
 
 On the left hand side click **Settings**
-In the **Basic** tab add your domain into the **App Domains** section as well as enter a contact email (required for facebook developer program). In the **Advanced** tab scroll down to the **Client OAuth Settings** Make sure that **Client OAuth Login** is enabled as well as **Web OAuth Login** is enabled. In the **Valid OAuth redirect URIs** section add the routes of all pages that are protected by login. This includes the domains. EX: `http://getgrav.org/`, `http://getgrav.org/login`, `http://getgrav.org/en/login`, and `http://getgrav.org/protected/page/route`
-
+In the **Basic** tab add your domain into the **App Domains** section as well as enter a contact email (required for facebook developer program). In the **Product Settings** menu click "Facebook Login". Scroll down to the **Client OAuth Settings** Make sure that **Client OAuth Login** is enabled as well as **Web OAuth Login** is enabled. In the **Valid OAuth redirect URIs** section add the routes of all pages that are protected by login. This includes the domains. EX: `http://getgrav.org/`, `http://getgrav.org/login`, `http://getgrav.org/en/login`, and `http://getgrav.org/protected/page/route`
 
 ## Github
 
@@ -46,7 +45,7 @@ Visit Github's [Developer Applications Console](https://github.com/settings/deve
 
 Fill out the name and the URL (can be anything) and fill in the **callback**, which must be equal to where your grav site is located, generally just the host, i.e. `http://getgrav.org`. ![](assets/github/github_2.png)
 
-Copy **Client ID** and **client secret** into login.yaml under Github. ![](assets/github/github_3.png)Be sure to change `Github.enabled` to `true`
+Copy **Client ID** and **client secret** into the plugin configuration under Github. ![](assets/github/github_3.png)Be sure to change `Github.enabled` to `true`
 
 ## Google
 
@@ -68,7 +67,7 @@ If needed, enter multiple sub domains, creating an entry for each. **Authorized 
 
 ![](assets/google/google_7.png)
 
-Copy **Client ID** and **client secret** into login.yaml under Google. ![](assets/google/google_8.png)Be sure to change `Google.enabled` to `true`
+Copy **Client ID** and **client secret** into the plugin configuration under Google. ![](assets/google/google_8.png)Be sure to change `Google.enabled` to `true`
 
 ## Twitter
 
