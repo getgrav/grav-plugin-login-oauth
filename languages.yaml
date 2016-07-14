@@ -1,0 +1,83 @@
+en:
+  PLUGIN_LOGIN_OAUTH:
+    OAUTH_LOGIN: Sign in with %s
+    OAUTH_SIGNIN: Sign in with your username and password
+    OAUTH_CONNECT_MESSAGE: Connect with a social network
+    OAUTH_CONNECT_MESSAGE_EXTRA: other social networks
+    OAUTH_PROVIDER_NOT_SUPPORTED: OAuth provider "%s" is not supported
+    OAUTH_SECTION: OAuth
+    OAUTH_ENABLE: Enable OAuth
+    OAUTH_PROVIDER_SECTION: OAuth providers
+    OAUTH_PROVIDER_FACEBOOK: Enable Facebook OAuth
+    OAUTH_PROVIDER_GOOGLE: Enable Google OAuth
+    OAUTH_PROVIDER_GITHUB: Enable GitHub OAuth
+    OAUTH_PROVIDER_TWITTER: Enable Twitter OAuth
+    OAUTH_CLIENT_ID: Client ID
+    OAUTH_CLIENT_SECRET: Client secret
+    FACEBOOK: Facebook
+    GOOGLE: Google
+    GITHUB: GitHub
+    TWITTER: Twitter
+    OR: or
+    ENABLE_A_PROVIDER: No providers enabled. Enable one or more providers.
+    BUILTIN_CSS: Use built in CSS
+    BUILTIN_CSS_HELP: Include the CSS provided by the OAuth plugin
+
+fr:
+  PLUGIN_LOGIN_OAUTH:
+    OAUTH_LOGIN: Se connecter avec %s
+    OAUTH_SIGNIN: Se connecter avec votre identifiant et mot de passe
+    OAUTH_CONNECT_MESSAGE: Se connecter avec un réseau social
+    OAUTH_CONNECT_MESSAGE_EXTRA: d'autres réseaux sociaux
+    OAUTH_PROVIDER_NOT_SUPPORTED: Le fournisseur OAuth "%s" n'est pas pris en charge
+    OAUTH_SECTION: OAuth
+    OAUTH_ENABLE: Activer OAuth
+    OAUTH_PROVIDER_SECTION: Fournisseurs OAuth
+    OAUTH_PROVIDER_FACEBOOK: OAuth Facebook activé
+    OAUTH_PROVIDER_GOOGLE: OAuth Google activé
+    OAUTH_PROVIDER_GITHUB: OAuth GitHub activé
+    OAUTH_PROVIDER_TWITTER: OAuth Twitter activé
+    OAUTH_CLIENT_ID: ID Client
+    OAUTH_CLIENT_SECRET: Secret client
+    FACEBOOK: Facebook
+    GOOGLE: Google
+    GITHUB: GitHub
+    TWITTER: Twitter
+    OR: ou
+    ENABLE_A_PROVIDER: Aucun fournisseur activé. Activer un ou plusieurs fournisseurs.
+    BUILTIN_CSS: Utiliser les CSS intégrés
+    BUILTIN_CSS_HELP: Utiliser les CSS fournis dans le plugin
+
+hr:
+  PLUGIN_LOGIN_OAUTH:
+    OAUTH_LOGIN: Prijavi se sa %s
+    OAUTH_SIGNIN: Prijavi se sa svojim korisničkim imenom i lozinkom
+    OAUTH_CONNECT_MESSAGE: Poveži se preko socijalnih mreža
+    OAUTH_CONNECT_MESSAGE_EXTRA: druge socijalne mreže
+    OAUTH_PROVIDER_NOT_SUPPORTED: OAuth provider "%s" nije podržan
+    OR: ili
+
+hu:
+  PLUGIN_LOGIN_OAUTH:
+    OAUTH_LOGIN: Belépés %s használatával
+    OAUTH_SIGNIN: Belépés felhasználóneved és jelszavad megadásával
+    OAUTH_CONNECT_MESSAGE: Összekapcsolás egy közösségi oldallal
+    OAUTH_CONNECT_MESSAGE_EXTRA: más közösségi oldalak
+    OAUTH_PROVIDER_NOT_SUPPORTED: A(z) "%s" OAuth szolgáltató nem használható
+    OAUTH_SECTION: OAuth
+    OAUTH_ENABLE: OAuth engedélyezése
+    OAUTH_PROVIDER_SECTION: OAuth szolgáltatók
+    OAUTH_PROVIDER_FACEBOOK: Facebook OAuth Enegdélyezése
+    OAUTH_PROVIDER_GOOGLE: Google OAuth Engedélyezése
+    OAUTH_PROVIDER_GITHUB: GitHub OAuth Engedélyezése
+    OAUTH_PROVIDER_TWITTER: Twitter OAuth Engeédlyezése
+    OAUTH_CLIENT_ID: Client ID
+    OAUTH_CLIENT_SECRET: Client secret
+    FACEBOOK: Facebook
+    GOOGLE: Google
+    GITHUB: GitHub
+    TWITTER: Twitter
+    OR: vagy
+
+    BUILTIN_CSS: Koristi ugrađeni CSS
+    BUILTIN_CSS_HELP: Uključi CSS koji dolazi sa pluginom
