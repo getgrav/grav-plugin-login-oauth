@@ -23,7 +23,7 @@ en:
     BUILTIN_CSS: Use built in CSS
     BUILTIN_CSS_HELP: Include the CSS provided by the OAuth plugin
 
-dn:
+de:
   PLUGIN_LOGIN_OAUTH:
     OAUTH_LOGIN: Anmelden mit %s
     OAUTH_SIGNIN: Mit Benutzername und Passwort anmelden
