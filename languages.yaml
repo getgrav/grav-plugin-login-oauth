@@ -23,6 +23,31 @@ en:
     BUILTIN_CSS: Use built in CSS
     BUILTIN_CSS_HELP: Include the CSS provided by the OAuth plugin
 
+de:
+  PLUGIN_LOGIN_OAUTH:
+    OAUTH_LOGIN: Anmelden mit %s
+    OAUTH_SIGNIN: Mit Benutzername und Passwort anmelden
+    OAUTH_CONNECT_MESSAGE: Mit sozialem Netzwerk verbinden
+    OAUTH_CONNECT_MESSAGE_EXTRA: andere soziale Netzwerke
+    OAUTH_PROVIDER_NOT_SUPPORTED: OAuth Provider "%s" wird nicht unterstützt
+    OAUTH_SECTION: OAuth
+    OAUTH_ENABLE: OAuth aktivieren
+    OAUTH_PROVIDER_SECTION: OAuth Anbieter
+    OAUTH_PROVIDER_FACEBOOK: Facebook OAuth aktivieren
+    OAUTH_PROVIDER_GOOGLE: Google OAuth aktivieren
+    OAUTH_PROVIDER_GITHUB: GitHub OAuth aktivieren
+    OAUTH_PROVIDER_TWITTER: Twitter OAuth aktivieren
+    OAUTH_CLIENT_ID: Client ID
+    OAUTH_CLIENT_SECRET: Client Secret
+    FACEBOOK: Facebook
+    GOOGLE: Google
+    GITHUB: GitHub
+    TWITTER: Twitter
+    OR: oder
+    ENABLE_A_PROVIDER: Keine Anbieter aktiviert. Aktiviere einen oder mehrere Anbieter.
+    BUILTIN_CSS: Integrierte CSS verwenden
+    BUILTIN_CSS_HELP: Vom Anbieter zur Verfügung gestellte CSS einfügen
+
 fr:
   PLUGIN_LOGIN_OAUTH:
     OAUTH_LOGIN: Se connecter avec %s
