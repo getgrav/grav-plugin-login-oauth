@@ -106,3 +106,27 @@ hu:
 
     BUILTIN_CSS: Koristi ugrađeni CSS
     BUILTIN_CSS_HELP: Uključi CSS koji dolazi sa pluginom
+ro:
+  PLUGIN_LOGIN_OAUTH:
+    OAUTH_LOGIN: 'Intrați în cont cu %s' 
+    OAUTH_SIGNIN: 'Intrați în cont cu numele de utilizator și parola'
+    OAUTH_CONNECT_MESSAGE: 'Conectași-vă cu o rețea de socializare'
+    OAUTH_CONNECT_MESSAGE_EXTRA:'alte rețele de socializare'
+    OAUTH_PROVIDER_NOT_SUPPORTED: 'Furnizorul "%s" nu este suportat' provider  is not supported
+    OAUTH_SECTION: 'OAuth'
+    OAUTH_ENABLE: Enable 'OAuth'
+    OAUTH_PROVIDER_SECTION: 'Furnizori OAuth'
+    OAUTH_PROVIDER_FACEBOOK: 'Activați Facebook OAuth'
+    OAUTH_PROVIDER_GOOGLE: 'Activați Google OAuth'
+    OAUTH_PROVIDER_GITHUB: 'Activați Github OAuth'
+    OAUTH_PROVIDER_TWITTER: 'Activați Twitter OAuth'
+    OAUTH_CLIENT_ID: 'ID de client' 
+    OAUTH_CLIENT_SECRET: 'Secretul de client' 
+    FACEBOOK: 'Facebook'
+    GOOGLE: 'Google'
+    GITHUB: 'GitHub'
+    TWITTER: 'Twitter'
+    OR: 'sau'
+    ENABLE_A_PROVIDER: 'Nici un furnizor activat. Activați cel puțin un furnizor'
+    BUILTIN_CSS: 'Folosește CSS-ul din modul'
+    BUILTIN_CSS_HELP: 'Include CSS-ul modulului OAuth'
