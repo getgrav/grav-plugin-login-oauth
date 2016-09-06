@@ -1,8 +1,12 @@
-# v1.x.x
-## 08/xx/2016
+# v1.1.0
+## 09/06/2016
 
 1. [](#improved)
     * Added Romanian and German translations
+    * Tidy up spacing
+1. [](#bugfix)
+    * Fixed Twitter error
+    * Fixed a typo
 
 # v1.0.0
 ## 07/14/2016
