@@ -12,12 +12,14 @@ en:
     OAUTH_PROVIDER_GOOGLE: Enable Google OAuth
     OAUTH_PROVIDER_GITHUB: Enable GitHub OAuth
     OAUTH_PROVIDER_TWITTER: Enable Twitter OAuth
+    OAUTH_PROVIDER_LINKEDIN: Enable LinkedIn OAuth
     OAUTH_CLIENT_ID: Client ID
     OAUTH_CLIENT_SECRET: Client secret
     FACEBOOK: Facebook
     GOOGLE: Google
     GITHUB: GitHub
     TWITTER: Twitter
+    LINKEDIN: LinkedIn
     OR: or
     ENABLE_A_PROVIDER: No providers enabled. Enable one or more providers.
     BUILTIN_CSS: Use built in CSS
@@ -37,12 +39,14 @@ de:
     OAUTH_PROVIDER_GOOGLE: Google OAuth aktivieren
     OAUTH_PROVIDER_GITHUB: GitHub OAuth aktivieren
     OAUTH_PROVIDER_TWITTER: Twitter OAuth aktivieren
+    OAUTH_PROVIDER_LINKEDIN: LinkedIn OAuth aktivieren
     OAUTH_CLIENT_ID: Client ID
     OAUTH_CLIENT_SECRET: Client Secret
     FACEBOOK: Facebook
     GOOGLE: Google
     GITHUB: GitHub
     TWITTER: Twitter
+    LINKEDIN: LinkedIn
     OR: oder
     ENABLE_A_PROVIDER: Keine Anbieter aktiviert. Aktiviere einen oder mehrere Anbieter.
     BUILTIN_CSS: Integrierte CSS verwenden
@@ -62,12 +66,14 @@ fr:
     OAUTH_PROVIDER_GOOGLE: OAuth Google activé
     OAUTH_PROVIDER_GITHUB: OAuth GitHub activé
     OAUTH_PROVIDER_TWITTER: OAuth Twitter activé
+    OAUTH_PROVIDER_LINKEDIN: OAuth LinkedIn activé
     OAUTH_CLIENT_ID: ID Client
     OAUTH_CLIENT_SECRET: Secret client
     FACEBOOK: Facebook
     GOOGLE: Google
     GITHUB: GitHub
     TWITTER: Twitter
+    LINKEDIN: LinkedIn
     OR: ou
     ENABLE_A_PROVIDER: Aucun fournisseur activé. Activer un ou plusieurs fournisseurs.
     BUILTIN_CSS: Utiliser les CSS intégrés
@@ -96,12 +102,14 @@ hu:
     OAUTH_PROVIDER_GOOGLE: Google OAuth Engedélyezése
     OAUTH_PROVIDER_GITHUB: GitHub OAuth Engedélyezése
     OAUTH_PROVIDER_TWITTER: Twitter OAuth Engeédlyezése
+    OAUTH_PROVIDER_LINKEDIN: LinkedIn Auth Engeédlyezése
     OAUTH_CLIENT_ID: Client ID
     OAUTH_CLIENT_SECRET: Client secret
     FACEBOOK: Facebook
     GOOGLE: Google
     GITHUB: GitHub
     TWITTER: Twitter
+    LINKEDIN: LinkedIn
     OR: vagy
 
     BUILTIN_CSS: Koristi ugrađeni CSS
@@ -120,12 +128,14 @@ ro:
     OAUTH_PROVIDER_GOOGLE: 'Activați Google OAuth'
     OAUTH_PROVIDER_GITHUB: 'Activați Github OAuth'
     OAUTH_PROVIDER_TWITTER: 'Activați Twitter OAuth'
+    OAUTH_PROVIDER_LINKEDIN: 'Activați LinkedIn OAuth'
     OAUTH_CLIENT_ID: 'ID de client'
     OAUTH_CLIENT_SECRET: 'Secretul de client'
     FACEBOOK: 'Facebook'
     GOOGLE: 'Google'
     GITHUB: 'GitHub'
     TWITTER: 'Twitter'
+    LINKEDIN: LinkedIn
     OR: 'sau'
     ENABLE_A_PROVIDER: 'Nici un furnizor activat. Activați cel puțin un furnizor'
     BUILTIN_CSS: 'Folosește CSS-ul din modul'

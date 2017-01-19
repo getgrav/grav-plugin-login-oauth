@@ -30,6 +30,9 @@
 #grav-login .form-oauth button.github {
     background-color: #5c5853;
 }
+#grav-login .form-oauth button.linkedin {
+    background-color: #1a85bc;
+}
 #grav-login .form-oauth button.bitbucket {
     background-color: #205081;
 }

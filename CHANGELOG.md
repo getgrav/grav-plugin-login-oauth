@@ -1,3 +1,12 @@
+# v1.2.0
+## 12/18/2017
+
+1. [](#new)
+    * Added LinkedIn provider [#11](https://github.com/getgrav/grav-plugin-login-oauth/pull/11)
+1. [](#improved)
+    * Added Facebook email scope [#10](https://github.com/getgrav/grav-plugin-login-oauth/pull/10)
+    * Updated OAuth library to v0.8.9
+
 # v1.1.0
 ## 09/06/2016
 
