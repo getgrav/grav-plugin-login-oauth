@@ -4,6 +4,7 @@ built_in_css: true
 providers:
   Facebook:
     enabled: false
+    enable_email: false
     credentials:
       key:
       secret:

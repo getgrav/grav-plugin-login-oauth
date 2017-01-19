@@ -69,6 +69,10 @@ class Controller extends \Grav\Plugin\Login\Controller
         if (extension_loaded('curl')) {
             $this->factory->setHttpClient(new CurlClient());
         }
+        // Check configuration
+        if( $this->grav['config']->get('plugins.login-oauth.providers.Facebook.enable_email') ){
+          array_push( $this->scopes['facebook'] , 'email' );
+        }
     }
 
     /**
@@ -209,7 +213,11 @@ class Controller extends \Grav\Plugin\Login\Controller
     {
         return $this->genericOAuthProvider(function () {
             // Send a request now that we have access token
-            $data = json_decode($this->service->request('/me'), true);
+            $fields_query='';
+            if( $this->grav['config']->get('plugins.login-oauth.providers.Facebook.enable_email') ){
+              $fields_query = '?fields=id,name,email';
+            }
+            $data = json_decode($this->service->request('/me'.$fields_query), true);
             $email = isset($data['email']) ? $data['email'] : '';
 
             $dataUser = [
@@ -340,6 +348,11 @@ class Controller extends \Grav\Plugin\Login\Controller
 
         } else {
             $authenticated = $user->authenticate($password);
+            // Save new email if different.
+            if( $authenticated && $data['email'] != $user->get('email') ){
+                $user->set('email', $data['email'] );
+                $user->save();
+            }
         }
 
         // Store user in session
