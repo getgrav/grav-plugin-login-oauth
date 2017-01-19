@@ -26,3 +26,9 @@ providers:
     credentials:
       key:
       secret:
+          
+  Linkedin:
+    enabled: false
+    credentials:
+      key:
+      secret:

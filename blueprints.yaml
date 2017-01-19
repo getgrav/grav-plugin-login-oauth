@@ -50,7 +50,7 @@ form:
                 0: PLUGIN_ADMIN.DISABLED
               validate:
                 type: bool
-              
+
         providers:
           type: tab
           title: PLUGIN_LOGIN_OAUTH.OAUTH_PROVIDER_SECTION
@@ -162,6 +162,34 @@ form:
                     type: string
 
                 providers.Twitter.credentials.secret:
+                  type: text
+                  label: PLUGIN_LOGIN_OAUTH.OAUTH_CLIENT_SECRET
+                  validate:
+                    type: string
+
+            providers.Linkedin:
+              type: section
+              title: PLUGIN_LOGIN_OAUTH.LINKEDIN
+
+              fields:
+                providers.Linkedin.enabled:
+                  type: toggle
+                  label: PLUGIN_LOGIN_OAUTH.OAUTH_PROVIDER_LINKEDIN
+                  highlight: 1
+                  default: 0
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                  validate:
+                    type: bool
+
+                providers.Linkedin.credentials.key:
+                  type: text
+                  label: PLUGIN_LOGIN_OAUTH.OAUTH_CLIENT_ID
+                  validate:
+                    type: string
+
+                providers.Linkedin.credentials.secret:
                   type: text
                   label: PLUGIN_LOGIN_OAUTH.OAUTH_CLIENT_SECRET
                   validate:

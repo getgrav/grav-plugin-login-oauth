@@ -47,7 +47,8 @@ class Controller extends \Grav\Plugin\Login\Controller
     protected $scopes = [
         'github'   => ['user'],
         'google'   => ['userinfo_email', 'userinfo_profile'],
-        'facebook' => ['public_profile']
+        'facebook' => ['public_profile'],
+        'linkedin' => ['r_basicprofile', 'r_emailaddress']
     ];
 
     /**
@@ -300,6 +301,32 @@ class Controller extends \Grav\Plugin\Login\Controller
             // Authenticate OAuth user against Grav system.
             return $this->authenticateOAuth($dataUser, $lang);
         }, 'oauth1');
+    }
+
+    /**
+     * Implements OAuth authentication for Linkedin
+     *
+     * @return null|bool          Returns a boolean on finished authentication.
+     */
+    public function oauthLinkedin()
+    {
+        return $this->genericOAuthProvider(function () {
+            // Get id, full name, email and language
+            $profile = simplexml_load_string($this->service->request('people/~:(id,first-name,last-name,email-address,location)'));
+            $id = (string)$profile->{"id"};
+            $fullname = (string)$profile->{"first-name"}.' '.$profile->{"last-name"};
+            $email_address = (string)$profile->{"email-address"};
+            $lang = isset($profile->location->country->code) ? (string)$profile->location->country->code : '';
+
+            $dataUser = [
+                'id'       => $id,
+                'fullname' => $fullname,
+                'email'    => $email_address
+            ];
+
+            // Authenticate OAuth user against Grav system.
+            return $this->authenticateOAuth($dataUser, $lang);
+        });
     }
 
     /**
