@@ -1,6 +1,6 @@
 name: Login Plugin OAuth Addon
 version: 1.2.0
-description: Enables login with OAuth accounts. Currently provides Facebook, Google, Twitter, Github
+description: Enables login with OAuth accounts. Currently provides Facebook, Google, Twitter, Github, LinkedIn
 icon: sign-in
 author:
   name: Team Grav
