@@ -111,6 +111,16 @@ form:
                   validate:
                     type: string
 
+                providers.Google.whitelist:
+                  type: array
+                  label: PLUGIN_LOGIN_OAUTH.WHITELIST
+                  value_only: true
+
+                providers.Google.blacklist:
+                  type: array
+                  label: PLUGIN_LOGIN_OAUTH.BLACKLIST
+                  value_only: true
+
             providers.GitHub:
               type: section
               title: PLUGIN_LOGIN_OAUTH.GITHUB
