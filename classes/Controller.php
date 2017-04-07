@@ -239,8 +239,32 @@ class Controller extends \Grav\Plugin\Login\Controller
     public function oauthGoogle()
     {
         return $this->genericOAuthProvider(function () {
+            /** @var \Grav\Common\Language\Language */
+            $t = $this->grav['language'];
+
             // Get fullname, email and language
             $data = json_decode($this->service->request('userinfo'), true);
+
+            if ( $this->grav['config']->get('plugins.login-oauth.providers.Google.whitelist') ) {
+                $whitelist = $this->grav['config']->get('plugins.login-oauth.providers.Google.whitelist', []);
+
+                $domain = isset($data['hd'])?$data['hd']:'gmail.com';
+
+                if ( !in_array($domain, $whitelist) ) {
+                    $this->setMessage($t->translate(['PLUGIN_LOGIN_OAUTH.EMAIL_DOMAIN_NOT_PERMITTED', $domain]));
+                    return null;
+                }
+            }
+
+            if ( $this->grav['config']->get('plugins.login-oauth.providers.Google.blacklist') ) {
+                $blacklist = $this->grav['config']->get('plugins.login-oauth.providers.Google.blacklist', []);
+                $domain = isset($data['hd'])?$data['hd']:'gmail.com';
+
+                if( in_array($domain, $blacklist)) {
+                    $this->setMessage($t->translate(['PLUGIN_LOGIN_OAUTH.EMAIL_DOMAIN_NOT_PERMITTED', $domain]));
+                    return null;
+                }
+            }
             $fullname = $data['given_name'] . ' ' . $data['family_name'];
             if (preg_match('~[\w\s]+\((\w+)\)~i', $data['name'], $matches)) {
                 $fullname = $matches[1];

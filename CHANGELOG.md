@@ -1,3 +1,8 @@
+# v1.3.0
+## 04/7/2017
+1. [](#new)
+    * Added Blacklist and Whitelist support to Google
+
 # v1.2.0
 ## 12/18/2017
 

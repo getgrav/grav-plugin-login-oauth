@@ -24,6 +24,9 @@ en:
     ENABLE_A_PROVIDER: No providers enabled. Enable one or more providers.
     BUILTIN_CSS: Use built in CSS
     BUILTIN_CSS_HELP: Include the CSS provided by the OAuth plugin
+    BLACKLIST: Blacklist
+    WHITELIST: Whitelist
+    EMAIL_DOMAIN_NOT_PERMITTED: Email domain "%s" is not permitted
 
 de:
   PLUGIN_LOGIN_OAUTH:
