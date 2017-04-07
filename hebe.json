@@ -1,0 +1,15 @@
+{
+   "project":"grav-plugin-login-oauth",
+   "platforms":{
+      "grav":{
+         "nodes":{
+            "plugin":[
+               {
+                  "source":"/",
+                  "destination":"/user/plugins/login-oauth"
+               }
+            ]
+         }
+      }
+   }
+}
