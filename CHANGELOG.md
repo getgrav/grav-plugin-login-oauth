@@ -1,5 +1,12 @@
+# v1.3.1
+## 09/12/2017
+
+1. [](#bugfix)
+    * Compatibility fixes with Login plugin v2.4.0 [Login#130](https://github.com/getgrav/grav-plugin-login/issues/130)
+
 # v1.3.0
 ## 04/7/2017
+
 1. [](#new)
     * Added Blacklist and Whitelist support to Google
 
