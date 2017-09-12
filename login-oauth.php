@@ -46,7 +46,6 @@ class LoginOauthPlugin extends Plugin
         /** @var Session */
         $session = $this->grav['session'];
 
-
         $this->enable([
             'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
             'onTwigSiteVariables' => ['onTwigSiteVariables', 0],

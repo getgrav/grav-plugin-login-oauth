@@ -95,7 +95,7 @@ class Controller extends \Grav\Plugin\Login\Controller
             $this->service = $this->factory->createService($this->action, $credentials, $this->storage, $scope);
         }
         if (!$this->service || empty($config)) {
-            $this->setMessage($t->translate(['PLUGIN_LOGIN_OAUTH.OAUTH_PROVIDER_NOT_SUPPORTED', $this->action]));
+            $this->login->setMessage($t->translate(['PLUGIN_LOGIN_OAUTH.OAUTH_PROVIDER_NOT_SUPPORTED', $this->action]));
 
             return true;
         }
@@ -106,9 +106,9 @@ class Controller extends \Grav\Plugin\Login\Controller
         if (is_bool($authenticated)) {
             $this->reset();
             if ($authenticated) {
-                $this->setMessage($t->translate('PLUGIN_LOGIN.LOGIN_SUCCESSFUL'));
+                $this->login->setMessage($t->translate('PLUGIN_LOGIN.LOGIN_SUCCESSFUL'));
             } else {
-                $this->setMessage($t->translate('PLUGIN_LOGIN.ACCESS_DENIED'));
+                $this->login->setMessage($t->translate('PLUGIN_LOGIN.ACCESS_DENIED'));
             }
 
             // Redirect to current URI
@@ -118,7 +118,7 @@ class Controller extends \Grav\Plugin\Login\Controller
             }
             $this->setRedirect($redirect);
         } elseif (!$this->grav['session']->oauth) {
-            $this->setMessage($t->translate(['PLUGIN_LOGIN_OAUTH.OAUTH_PROVIDER_NOT_SUPPORTED', $this->action]));
+            $this->login->setMessage($t->translate(['PLUGIN_LOGIN_OAUTH.OAUTH_PROVIDER_NOT_SUPPORTED', $this->action]));
         }
 
         return true;
@@ -251,7 +251,7 @@ class Controller extends \Grav\Plugin\Login\Controller
                 $domain = isset($data['hd'])?$data['hd']:'gmail.com';
 
                 if ( !in_array($domain, $whitelist) ) {
-                    $this->setMessage($t->translate(['PLUGIN_LOGIN_OAUTH.EMAIL_DOMAIN_NOT_PERMITTED', $domain]));
+                    $this->login->setMessage($t->translate(['PLUGIN_LOGIN_OAUTH.EMAIL_DOMAIN_NOT_PERMITTED', $domain]));
                     return null;
                 }
             }
@@ -261,7 +261,7 @@ class Controller extends \Grav\Plugin\Login\Controller
                 $domain = isset($data['hd'])?$data['hd']:'gmail.com';
 
                 if( in_array($domain, $blacklist)) {
-                    $this->setMessage($t->translate(['PLUGIN_LOGIN_OAUTH.EMAIL_DOMAIN_NOT_PERMITTED', $domain]));
+                    $this->login->setMessage($t->translate(['PLUGIN_LOGIN_OAUTH.EMAIL_DOMAIN_NOT_PERMITTED', $domain]));
                     return null;
                 }
             }
