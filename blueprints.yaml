@@ -12,7 +12,7 @@ bugs: https://github.com/getgrav/grav-plugin-login-oauth/issues
 license: MIT
 
 dependencies:
-  - { name: login, version: '~2.0' }
+  - { name: login, version: '>=2.4.1' }
 
 form:
   validation: loose
