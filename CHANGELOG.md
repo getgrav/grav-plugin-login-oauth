@@ -1,3 +1,11 @@
+# v1.4.0
+## 12/06/2017
+
+1. [](#bugfix)
+    * Compatibility fixes with Login plugin v2.5.0 - Messages system
+1. [](#improved)
+    * Updated OAuth library to v0.8.10 [#14](https://github.com/getgrav/grav-plugin-login-oauth/issues/14)
+
 # v1.3.1
 ## 09/12/2017
 
@@ -11,7 +19,7 @@
     * Added Blacklist and Whitelist support to Google
 
 # v1.2.0
-## 12/18/2017
+## 1/18/2017
 
 1. [](#new)
     * Added LinkedIn provider [#11](https://github.com/getgrav/grav-plugin-login-oauth/pull/11)

@@ -83,6 +83,7 @@ class Controller extends \Grav\Plugin\Login\Controller
     {
         /** @var \Grav\Common\Language\Language */
         $t = $this->grav['language'];
+        $messages = $this->grav['messages'];
         $provider = strtolower($this->action);
         $config = $this->grav['config']->get('plugins.login-oauth.providers.' . $this->action, []);
 
@@ -95,7 +96,7 @@ class Controller extends \Grav\Plugin\Login\Controller
             $this->service = $this->factory->createService($this->action, $credentials, $this->storage, $scope);
         }
         if (!$this->service || empty($config)) {
-            $this->login->setMessage($t->translate(['PLUGIN_LOGIN_OAUTH.OAUTH_PROVIDER_NOT_SUPPORTED', $this->action]));
+            $messages->add($t->translate(['PLUGIN_LOGIN_OAUTH.OAUTH_PROVIDER_NOT_SUPPORTED', $this->action]));
 
             return true;
         }
@@ -106,9 +107,9 @@ class Controller extends \Grav\Plugin\Login\Controller
         if (is_bool($authenticated)) {
             $this->reset();
             if ($authenticated) {
-                $this->login->setMessage($t->translate('PLUGIN_LOGIN.LOGIN_SUCCESSFUL'));
+                $messages->add($t->translate('PLUGIN_LOGIN.LOGIN_SUCCESSFUL'));
             } else {
-                $this->login->setMessage($t->translate('PLUGIN_LOGIN.ACCESS_DENIED'));
+                $messages->add($t->translate('PLUGIN_LOGIN.ACCESS_DENIED'));
             }
 
             // Redirect to current URI
@@ -118,7 +119,7 @@ class Controller extends \Grav\Plugin\Login\Controller
             }
             $this->setRedirect($redirect);
         } elseif (!$this->grav['session']->oauth) {
-            $this->login->setMessage($t->translate(['PLUGIN_LOGIN_OAUTH.OAUTH_PROVIDER_NOT_SUPPORTED', $this->action]));
+            $messages->add($t->translate(['PLUGIN_LOGIN_OAUTH.OAUTH_PROVIDER_NOT_SUPPORTED', $this->action]));
         }
 
         return true;
@@ -241,6 +242,7 @@ class Controller extends \Grav\Plugin\Login\Controller
         return $this->genericOAuthProvider(function () {
             /** @var \Grav\Common\Language\Language */
             $t = $this->grav['language'];
+            $messages = $this->grav['messages'];
 
             // Get fullname, email and language
             $data = json_decode($this->service->request('userinfo'), true);
@@ -251,7 +253,7 @@ class Controller extends \Grav\Plugin\Login\Controller
                 $domain = isset($data['hd'])?$data['hd']:'gmail.com';
 
                 if ( !in_array($domain, $whitelist) ) {
-                    $this->login->setMessage($t->translate(['PLUGIN_LOGIN_OAUTH.EMAIL_DOMAIN_NOT_PERMITTED', $domain]));
+                    $messages->add($t->translate(['PLUGIN_LOGIN_OAUTH.EMAIL_DOMAIN_NOT_PERMITTED', $domain]));
                     return null;
                 }
             }
@@ -261,7 +263,7 @@ class Controller extends \Grav\Plugin\Login\Controller
                 $domain = isset($data['hd'])?$data['hd']:'gmail.com';
 
                 if( in_array($domain, $blacklist)) {
-                    $this->login->setMessage($t->translate(['PLUGIN_LOGIN_OAUTH.EMAIL_DOMAIN_NOT_PERMITTED', $domain]));
+                    $messages->add($t->translate(['PLUGIN_LOGIN_OAUTH.EMAIL_DOMAIN_NOT_PERMITTED', $domain]));
                     return null;
                 }
             }
