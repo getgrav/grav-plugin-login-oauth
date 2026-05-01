@@ -1,4 +1,6 @@
-# Grav Login Plugin OAuth Add-On
+# THIS PLUGIN IS DEPRECATED IN FAVOR OF LOGIN-OAUTH2 - https://github.com/trilbymedia/grav-plugin-login-oauth2
+
+## Grav Login Plugin OAuth Add-On
 
 The **Grav Login Plugin OAuth Add-On** for [Grav](http://github.com/getgrav/grav) adds the ability for users to log in using Social sites.
 
@@ -9,7 +11,7 @@ Currently Available Providers:
 - Twitter
 - LinkedIn
 
-# Installation
+## Installation
 
 The **login-oauth** plugin actually requires the help of the **login** plugin.
 
@@ -19,7 +21,7 @@ Both are available via GPM, and because the plugin has dependencies you just nee
 $ bin/gpm install login-oauth
 ```
 
-# Usage
+## Usage
 
 Add a login-protected page, then make sure you fill the "Route" in the Login plugin settings. Add this route to the callback url required by the OAuth application on the service desired. Example: `http://yoursite.com/login`.
 
@@ -27,7 +29,7 @@ Add a login-protected page, then make sure you fill the "Route" in the Login plu
 
 >IMPORTANT: `localhost` may NOT be used for callback and allowed URLs when creating OAuth provider applications due to certificate verification issues. Some services allow other URLs and it may be possible to add custom domains pointing to 127.0.0.1 in your hosts file and point applications there. GitHub and Twitter are tested to work on localhost too, if it does not work you can use a tunnel like ngrok to test locally
 
-## Facebook
+### Facebook
 
 Visit https://developers.facebook.com/quickstarts/?platform=web and create an app name then click **Create New Facebook App ID.**
 
@@ -40,7 +42,7 @@ Click **Skip Quick Start** Copy the **App ID** and **App Secret** into the plugi
 On the left hand side click **Settings**
 In the **Basic** tab add your domain into the **App Domains** section as well as enter a contact email (required for facebook developer program). In the **Product Settings** menu click "Facebook Login". Scroll down to the **Client OAuth Settings** Make sure that **Client OAuth Login** is enabled as well as **Web OAuth Login** is enabled. In the **Valid OAuth redirect URIs** section add the routes of all pages that are protected by login. This includes the domains. EX: `http://getgrav.org/`, `http://getgrav.org/login`, `http://getgrav.org/en/login`, and `http://getgrav.org/protected/page/route`
 
-## Github
+### Github
 
 Visit Github's [Developer Applications Console](https://github.com/settings/developers) and press button **Register new application** (login if necesarry). ![](assets/github/github.png)
 
@@ -48,7 +50,7 @@ Fill out the name and the URL (can be anything) and fill in the **callback**, wh
 
 Copy **Client ID** and **client secret** into the plugin configuration under Github. ![](assets/github/github_3.png)Be sure to change `Github.enabled` to `true`
 
-## Google
+### Google
 
 Visit the [Google Developers Console](https://console.developers.google.com) (sign in with a google account, preferably your businesses gmail).
 
@@ -70,10 +72,10 @@ If needed, enter multiple sub domains, creating an entry for each. **Authorized 
 
 Copy **Client ID** and **client secret** into the plugin configuration under Google. ![](assets/google/google_8.png)Be sure to change `Google.enabled` to `true`
 
-## Twitter
+### Twitter
 
 Login if necessary. Create a [new Twitter App](https://apps.twitter.com/app/new) , fill out name, application website, choose "Browser" as application type, choose the callback URL like above, default access type can be set to read-only, click on "Register application" and then you should be directed to your new application with the Client ID and secret ready to be copied and pasted into the YAML file.
 
-## LinkedIn
+### LinkedIn
 
 Go to [your Apps section](https://developer.linkedin.com/docs/fields/basic-profile) in LinkedIn Developers, and create an application. After that you will get a **Client ID** and a **Client Secret** of your app, copy and paste them in the config file or use the admin panel.
