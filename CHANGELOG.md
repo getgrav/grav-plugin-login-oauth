@@ -1,3 +1,11 @@
+# v1.4.3
+## 09/17/2026
+
+1. [](#bugfix)
+    * **[security] Accounts created by a social login can no longer be signed into with the normal login form.** Their username and password were both derived from the provider's user id — a public value, for GitHub and Google alike — so anyone who looked up that id could work out the password and log in as them without touching the provider. Social-login accounts now hold a random password nobody is given, existing ones are recognized and blocked, and each is retired to a random password the next time its owner signs in. Thanks to @AlpetGexha
+    * **[security] A provider callback that arrives without its anti-forgery `state` value is now rejected.** The value was passed to the OAuth library as `null`, which told the library to skip the check entirely, so a callback with no `state` was accepted — the one case the check exists to catch. Thanks to @AlpetGexha
+    * Signing in through a provider no longer depends on the account's stored password, so someone who had changed their password can sign in again.
+
 # v1.4.1
 ## 05/01/2026
 

@@ -193,10 +193,14 @@ class Controller extends \Grav\Plugin\Login\Controller
                     // Store CSRF in the session for later validation.
                     $this->storage->storeAuthorizationState($this->action, $state);
                 } else {
-                    // Retrieve the CSRF state parameter
-                    $state = isset($_GET['state']) ? $_GET['state'] : null;
+                    // OAuth2 callbacks must carry the state that was bound to
+                    // this session. Passing null makes the OAuth library skip
+                    // state validation entirely.
+                    if (!isset($_GET['state']) || !is_string($_GET['state']) || $_GET['state'] === '') {
+                        return false;
+                    }
                     // This was a callback request from the OAuth2 service, get the token
-                    $this->service->requestAccessToken($_GET['code'], $state);
+                    $this->service->requestAccessToken($_GET['code'], $_GET['state']);
 
                     return $callback();
                 }
@@ -383,7 +387,6 @@ class Controller extends \Grav\Plugin\Login\Controller
     {
         $username = $this->getUsername($data['id']);
         $user = User::load($username);
-        $password = md5($data['id']);
 
         if (!$user->exists()) {
             // Create the user
@@ -400,12 +403,45 @@ class Controller extends \Grav\Plugin\Login\Controller
             $user->save();
 
         } else {
-            $authenticated = $user->authenticate($password);
+            $provider = strtolower($this->action);
+            $providerId = (string)$data['id'];
+            $oauth = (array)$user->get('oauth', []);
+            $markedIdentity = isset($oauth['provider'], $oauth['id'])
+                && hash_equals((string)$oauth['provider'], $provider)
+                && hash_equals((string)$oauth['id'], $providerId);
+
+            // An account predating the provider marker belongs to this identity:
+            // the provider callback has just proven control of the id, and the
+            // username is derived from that same id. Adopt it on that basis rather
+            // than on the old md5-derived password — that credential is public, and
+            // a holder who had changed their password would never match it.
+            $legacyIdentity = $oauth === [];
+            $enabled = $user->get('state', 'enabled') === 'enabled';
+            $requiresTwoFactor = $this->grav['config']->get('plugins.login.twofa_enabled', false)
+                && $user->get('twofa_enabled')
+                && $user->get('twofa_secret');
+
+            // This legacy controller does not enter Login's 2FA challenge
+            // pipeline. Fail closed instead of silently bypassing it.
+            $authenticated = $enabled && !$requiresTwoFactor && ($markedIdentity || $legacyIdentity);
+            if ($authenticated && $legacyIdentity) {
+                // Mark it provider-only and retire the derived password, so the
+                // local login form can no longer authenticate this account.
+                $user->set('oauth', ['provider' => $provider, 'id' => $providerId]);
+                $user->password = $this->generatePassword();
+                $user->save();
+            }
+
             // Save new email if different.
             if( $authenticated && $data['email'] != $user->get('email') ){
                 $user->set('email', $data['email'] );
                 $user->save();
             }
+        }
+
+        if ($authenticated) {
+            $user->authenticated = true;
+            $user->authorized = true;
         }
 
         // Store user in session
@@ -431,12 +467,33 @@ class Controller extends \Grav\Plugin\Login\Controller
      */
     protected function createUser($data)
     {
-        $id = $data['id'];
-
-        $data['password'] = md5($id);
+        $data['password'] = $this->generatePassword();
         $data['state'] = 'enabled';
+        $data['oauth'] = [
+            'provider' => strtolower($this->action),
+            'id' => (string)$data['id'],
+        ];
 
         return $this->login->register($data);
+    }
+
+    /**
+     * Generate the placeholder password for a provider-only account.
+     *
+     * Nobody signs in with this: these accounts authenticate through their OAuth
+     * provider, and userLoginAuthenticate() in the plugin blocks the local login
+     * form for them. It still has to satisfy `system.pwd_regex`, which by default
+     * demands a digit and both letter cases, or Login::register() rejects it — so
+     * the random material is prefixed with one of each rather than being handed
+     * over as plain lowercase hex.
+     *
+     * @return string
+     */
+    protected function generatePassword()
+    {
+        $random = str_replace(['+', '/', '='], '', base64_encode($this->getRandomBytes(32)));
+
+        return 'Aa1' . $random;
     }
 
     /**
