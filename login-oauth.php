@@ -20,7 +20,63 @@ class LoginOauthPlugin extends Plugin
     {
         return [
             'onPluginsInitialized' => ['onPluginsInitialized', 0],
+            // Registered unconditionally, admin included: a provider-only account
+            // must not be reachable through any password form. Sits below Login's
+            // special-case handlers (10000+) and above its password check (0).
+            'onUserLoginAuthenticate' => ['userLoginAuthenticate', 100],
         ];
+    }
+
+    /**
+     * Refuse local password authentication for provider-only accounts.
+     *
+     * These accounts hold a random placeholder password nobody was ever given, and
+     * accounts created before this release hold one derived from the provider's
+     * public user id. Either way the password is not a credential the account
+     * holder chose, so the login form must not be able to authenticate with it.
+     * Signing in through the provider does not pass through this event.
+     */
+    public function userLoginAuthenticate($event)
+    {
+        $user = $event->getUser();
+        if (!$user->exists()) {
+            return;
+        }
+
+        $oauth = (array) $user->get('oauth', []);
+        if (empty($oauth['provider']) && !$this->isLegacyProviderAccount($user)) {
+            return;
+        }
+
+        $event->setStatus($event::AUTHENTICATION_FAILURE);
+        $event->stopPropagation();
+    }
+
+    /**
+     * Recognize an account provisioned before provider markers existed.
+     *
+     * Those accounts only gain a marker the next time their holder signs in
+     * through the provider, and until then their password is still the one
+     * derived from the provider's public user id — so they have to be recognized
+     * by the username this plugin generates, `<provider>.<id>`, using the
+     * configured provider names rather than any username containing a dot.
+     *
+     * @param  object $user
+     * @return bool
+     */
+    protected function isLegacyProviderAccount($user)
+    {
+        $username = (string) $user->get('username');
+        $providers = (array) $this->grav['config']->get('plugins.login-oauth.providers', []);
+
+        foreach (array_keys($providers) as $provider) {
+            $prefix = strtolower($provider) . '.';
+            if (strpos($username, $prefix) === 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
